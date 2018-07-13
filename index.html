@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>vue demo</title>
+        <!-- 引入vue，这样Vue就被声明为全局变量 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+        <!-- 引入外部css文件 -->
+        <link href="index.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="v-for-component">
+            <!-- form表单提交时其本身的默认行为被阻止，而是去执行addNewTodo()函数 -->
+            <form @submit.prevent="addNewTodo">
+                <label for="new-todo">add new todo</label>
+                <!-- 表单输入绑定newTodoText数据 -->
+                <input type="text" id="new-todo" v-model="newTodoText" placeholder="eg.water the flower">
+                <button>Add</button>
+            </form>
+            <ul>
+                <!-- 列表项使用"todo-list"组件,同时绑定唯一标识节点的key属性、自定义属性title、remove事件移除当前节点 -->
+                <li is="todo-list" 
+                    v-for="(todo,index) in todos" 
+                    :key="todo.id"
+                    :title="todo.title"
+                    @remove="todos.splice(index,1)">
+                </li>
+            </ul>
+        </div>                                                                     
+        <!-- 引入的外部js文件必须放在页面最后，否则会报错 -->
+        <script src="index.js"></script>
+    </body>
+</html>                                      
